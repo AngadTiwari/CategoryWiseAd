@@ -20,4 +20,5 @@
     <!- -->
     <string name="banner_ad_unit_id">ca-app-pub-6766034383785175/4666303645</string>
     <string name="title_activity_xml_parser">XmlParserActivity</string>
+    <string name="title_activity_w3_soapexample">W3SOAPExampleActivity</string>
 </resources>
