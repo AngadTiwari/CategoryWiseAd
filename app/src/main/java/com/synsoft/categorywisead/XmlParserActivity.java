@@ -83,6 +83,37 @@ public class XmlParserActivity extends AppCompatActivity {
         }
     }
 
+    public void parseSOAP(String xmlString)
+    {
+        ArrayList<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
+
+        Document doc = getDomElement(xmlString); // getting DOM element
+
+        NodeList nl = doc.getElementsByTagName("sVideoList");
+        // looping through all item nodes <item>
+        for (int i = 0; i < nl.getLength(); i++) {
+            // creating new HashMap
+            HashMap<String, String> map = new HashMap<String, String>();
+            Element e = (Element) nl.item(i);
+            // adding each child node to HashMap key => value
+            map.put("ID", getValue(e, "ID"));
+            map.put("Title", getValue(e, "Title"));
+            map.put("Rate", "Rs." + getValue(e, "Rate"));
+            map.put("Desc", getValue(e, "Desc"));
+
+            // adding HashList to ArrayList
+            menuItems.add(map);
+        }
+
+        // Adding menuItems to ListView
+        ListAdapter adapter = new SimpleAdapter(this, menuItems,
+                R.layout.list_itme,
+                new String[] { "Title", "Desc", "Rate" }, new int[] {
+                R.id.textView, R.id.textView2, R.id.textView3 });
+
+        ((ListView)findViewById(R.id.list)).setAdapter(adapter);
+    }
+
     public void parseSOAPResponse(String xmlString,boolean hasToRemoveXMLTag)
     {
         ArrayList<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
